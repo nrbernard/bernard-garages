@@ -1,13 +1,13 @@
 {
-  "name": "gatsby-starter-ghost",
-  "description": "A starter template to build lightning fast websites with Ghost and Gatsby",
+  "name": "bernard-garages",
+  "description": "A static blog made with Ghost and Gatsby",
   "version": "1.0.0",
   "license": "MIT",
-  "author": "Ghost Foundation",
-  "homepage": "https://docs.ghost.org/api/gatsby/",
+  "author": "Nick Bernard",
+  "homepage": "https://nrbernard.com",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tryghost/gatsby-starter-ghost.git"
+    "url": "git+https://github.com/nrbernard/bernard-garages.git"
   },
   "resolutions": {
     "sharp": "0.22.1"
@@ -16,7 +16,7 @@
     "node": ">= 8.9.0"
   },
   "bugs": {
-    "url": "https://github.com/tryghost/gatsby-starter-ghost/issues"
+    "url": "https://github.com/nrbernard/bernard-garages/issues"
   },
   "keywords": [
     "gatsby",
