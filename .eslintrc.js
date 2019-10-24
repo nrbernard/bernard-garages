@@ -54,6 +54,7 @@ module.exports = {
             {
                 "ignore": ["children"]
             }
-        ]
+        ],
+        "indent": ["error", "tab"],
     }
 };

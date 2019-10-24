@@ -1,7 +1,7 @@
 {
   "development": {
-    "apiUrl": "https://gatsby.ghost.io",
-    "contentApiKey": "9cc5c67c358edfdd81455149d0"
+    "apiUrl": "https://kirby.nrbernard.com",
+    "contentApiKey": "0c169a79b4e1c28337f5b26570"
   },
   "production": {
     "apiUrl": "https://gatsby.ghost.io",

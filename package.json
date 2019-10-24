@@ -36,14 +36,18 @@
     "eslint-plugin-react": "7.16.0"
   },
   "dependencies": {
+    "@emotion/core": "^10.0.22",
+    "@emotion/styled": "^10.0.22",
     "@tryghost/helpers": "1.1.16",
     "@tryghost/helpers-gatsby": "1.0.19",
+    "babel-plugin-styled-components": "^1.10.6",
     "cheerio": "1.0.0-rc.3",
     "gatsby": "2.16.3",
     "gatsby-awesome-pagination": "0.3.4",
     "gatsby-image": "2.2.29",
     "gatsby-plugin-advanced-sitemap": "1.4.5",
     "gatsby-plugin-catch-links": "2.1.15",
+    "gatsby-plugin-emotion": "^4.1.12",
     "gatsby-plugin-feed": "2.3.18",
     "gatsby-plugin-force-trailing-slashes": "1.0.4",
     "gatsby-plugin-manifest": "2.2.23",
