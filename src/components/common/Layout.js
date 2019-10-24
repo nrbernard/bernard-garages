@@ -2,13 +2,14 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import { Link, StaticQuery, graphql } from 'gatsby'
-import Img from 'gatsby-image'
+import styled from '@emotion/styled'
+import { css } from '@emotion/core'
 
 import { Navigation } from '.'
-import config from '../../utils/siteConfig'
 
 // Styles
 import '../../styles/app.css'
+import { gray } from './PostCard'
 
 /**
 * Main layout component
@@ -18,10 +19,49 @@ import '../../styles/app.css'
 * styles, and meta data for each page.
 *
 */
+
+const Header = styled.header`
+	height: 8rem;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding-left: 1rem;
+`
+
+const Logo = styled.div`
+	background-color: white;
+	border: 0.2rem solid ${gray};
+	height: 6rem;
+	width: 6rem;
+	border-radius: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	&:hover > span {
+		color: #ee4938;
+	}
+`
+
+const Lettering = styled.span`
+	color: ${gray};
+	font-weight: 600;
+	font-size: 2.2rem;
+	transition: color 0.2s ease-out;
+`
+
+const Nav = styled.nav`
+	display: flex;
+	align-items: center;
+`
+
+const navItemClass = css`
+	padding-right: 2rem;
+	text-transform: uppercase;
+`
+
 const DefaultLayout = ({ data, children, bodyClass, isHome }) => {
 	const site = data.allGhostSettings.edges[0].node
-	const twitterUrl = site.twitter ? `https://twitter.com/${site.twitter.replace(/^@/, ``)}` : null
-	const facebookUrl = site.facebook ? `https://www.facebook.com/${site.facebook.replace(/^\//, ``)}` : null
+	const navItems = site.navigation
 
 	return (
 		<>
@@ -32,7 +72,18 @@ const DefaultLayout = ({ data, children, bodyClass, isHome }) => {
 			</Helmet>
 
 			<div className="viewport">
-
+				<Header>
+					<Link to="/">
+						<Logo><Lettering>BG</Lettering></Logo>
+					</Link>
+					<Nav>
+						{
+							navItems.map((navItem, i) => (
+								<Link css={ navItemClass } to={navItem.url} key={i}>{navItem.label}</Link>
+							))
+						}
+					</Nav>
+				</Header>
 				<div className="viewport-top">
 					{/* The main header section on top of the screen */}
 					<header className="site-head" style={{ ...site.cover_image && { backgroundImage: `url(${site.cover_image})` } }}>
@@ -43,11 +94,6 @@ const DefaultLayout = ({ data, children, bodyClass, isHome }) => {
 										<Link to="/">{ site.title }</Link>
 									</div>
 								}
-								{/* <div className="site-mast-right">
-									{ site.twitter && <a href={ twitterUrl } className="site-nav-item" target="_blank" rel="noopener noreferrer"><img className="site-nav-icon" src="/images/icons/twitter.svg" alt="Twitter" /></a>}
-									{ site.facebook && <a href={ facebookUrl } className="site-nav-item" target="_blank" rel="noopener noreferrer"><img className="site-nav-icon" src="/images/icons/facebook.svg" alt="Facebook" /></a>}
-									<a className="site-nav-item" href={ `https://feedly.com/i/subscription/feed/${config.siteUrl}/rss/` } target="_blank" rel="noopener noreferrer"><img className="site-nav-icon" src="/images/icons/rss.svg" alt="RSS Feed" /></a>
-								</div> */}
 							</div>
 							{ isHome &&
 								<div className="site-banner">
@@ -55,15 +101,6 @@ const DefaultLayout = ({ data, children, bodyClass, isHome }) => {
 									<p className="site-banner-desc">{site.description}</p>
 								</div>
 							}
-							{/* <nav className="site-nav"> */}
-								{/* <div className="site-nav-left"> */}
-									{/* The navigation items as setup in Ghost */}
-									{/* <Navigation data={site.navigation} navClass="site-nav-item" /> */}
-								{/* </div> */}
-								{/* <div className="site-nav-right"> */}
-									{/* <Link className="site-nav-button" to="/about">About</Link> */}
-								{/* </div> */}
-							{/* </nav> */}
 						</div>
 					</header>
 
@@ -71,7 +108,6 @@ const DefaultLayout = ({ data, children, bodyClass, isHome }) => {
 						{/* All the main content gets inserted here, index.js, post.js */}
 						{ children }
 					</main>
-
 				</div>
 
 				<div className="viewport-bottom">

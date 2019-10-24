@@ -4,7 +4,7 @@ import styled from '@emotion/styled'
 import { css } from '@emotion/core'
 import { Link } from 'gatsby'
 
-const gray = `#3a3a3a`
+export const gray = `#3a3a3a`
 
 const PostWrapper = styled.li`
 	display: flex;
