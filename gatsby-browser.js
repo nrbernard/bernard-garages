@@ -1,4 +1,3 @@
-/* eslint-disable */
 /**
  * Trust All Scripts
  *
@@ -9,24 +8,27 @@
  * via ids/classnames etc.
  *
  */
-var trustAllScripts = function () {
-    var scriptNodes = document.querySelectorAll('.load-external-scripts script');
 
-    for (var i = 0; i < scriptNodes.length; i += 1) {
-        var node = scriptNodes[i];
-        var s = document.createElement('script');
-        s.type = node.type || 'text/javascript';
+import 'typeface-rubik';
 
-        if (node.attributes.src) {
-            s.src = node.attributes.src.value;
-        } else {
-            s.innerHTML = node.innerHTML;
-        }
+function trustAllScripts() {
+	const scriptNodes = document.querySelectorAll('.load-external-scripts script');
 
-        document.getElementsByTagName('head')[0].appendChild(s);
-    }
-};
+	for (let i = 0; i < scriptNodes.length; i += 1) {
+		let node = scriptNodes[i];
+		let s = document.createElement('script');
+		s.type = node.type || 'text/javascript';
 
-exports.onRouteUpdate = function () {
-    trustAllScripts();
-};
+		if (node.attributes.src) {
+			s.src = node.attributes.src.value;
+		} else {
+			s.innerHTML = node.innerHTML;
+		}
+
+		document.getElementsByTagName('head')[0].appendChild(s);
+	}
+}
+
+export function onRouteUpdage() {
+	trustAllScripts();
+}

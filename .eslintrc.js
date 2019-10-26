@@ -11,7 +11,7 @@ module.exports = {
     extends: [
         'plugin:ghost/node',
         'plugin:ghost/ember',
-        'plugin:react/recommended'
+        'airbnb'
     ],
     "settings": {
         "react": {
@@ -29,7 +29,6 @@ module.exports = {
         "no-inner-declarations": "off",
         "valid-jsdoc": "off",
         "require-jsdoc": "off",
-        "quotes": ["error", "backtick"],
         "consistent-return": ["error"],
         "arrow-body-style": [
             "error",
@@ -37,7 +36,6 @@ module.exports = {
             { "requireReturnForObjectLiteral": true }
         ],
         "jsx-quotes": ["error", "prefer-double"],
-        "semi": ["error", "never"],
         "object-curly-spacing": ["error", "always"],
         "comma-dangle": [
             "error",
@@ -55,6 +53,17 @@ module.exports = {
                 "ignore": ["children"]
             }
         ],
+        "react/jsx-filename-extension": "off",
+        "react/jsx-fragments": "off",
+        "react/jsx-wrap-multilines": "off",
+        "react/jsx-indent": ["error", "tab"],
+        "react/jsx-indent-props": ["error", "tab"],
+        "react/jsx-curly-spacing": ["error", { "when": "always" }],
+        "react/jsx-curly-newline": "off",
+        "no-tabs": "off",
         "indent": ["error", "tab"],
+        "react/require-default-props": "off",
+        "arrow-parens": ["error", "as-needed"],
+        "operator-linebreak": "off",
     }
 };
