@@ -1,59 +1,62 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import styled from '@emotion/styled'
-import { css } from '@emotion/core'
-import { Link } from 'gatsby'
+import React from 'react';
+import PropTypes from 'prop-types';
+import styled from '@emotion/styled';
+import { css } from '@emotion/core';
+import { Link } from 'gatsby';
 
-export const gray = `#3a3a3a`
+export const gray = '#3a3a3a';
 
 const PostWrapper = styled.li`
+	display: grid;
+	grid-template-columns: 33% 1fr;
+	grid-gap: 2rem;
+	border-bottom: 1px solid #e2e2e2;
+	padding: 2rem 0;
+`;
+
+const Image = styled.img`
+	max-width: 100%;
+	height: auto;
+	border-radius: 3px;
+	opacity: 1;
+	transition: opacity 0.3s ease-out;
+	&:hover {
+		opacity: 0.9;
+	}
+`;
+
+const ExerptWrapper = styled.div`
 	display: flex;
-	border-top: 1px solid #e2e2e2;
-	padding: 2% 0;
-	margin-bottom: 0;
-`
+	flex-direction: column;
+`;
 
 const Paragraph = styled.p`
 	color: ${gray};
 	font-size: 1.5rem;
 	font-weight: 400;
 	line-height: 1.65;
-`
-const ExcerptWrapper = styled.div`
-	width: 60%;
-	padding: 5%;
-`
-
-const Image = styled.img`
-	width: auto;
-	max-width: 100%;
-	height: auto;
-	display: block;
-`
+`;
 
 const Header = styled.h2`
-	font-size: 2.5rem;
-	margin-bottom: 1.5rem;
-`
+	margin-top: 0;
+`;
 
 const PostCard = ({ post }) => {
-	const url = `/${post.slug}/`
+	const url = `/${post.slug}/`;
 
 	return (
-		<Link to={url}>
-			<PostWrapper>
-				<span css={ css`width: 40%;` }>
-					<Image src={ post.feature_image } />
-				</span>
-				<ExcerptWrapper>
-					<Header>{ post.title }</Header>
-					<Paragraph>{ post.excerpt }</Paragraph>
-					<Link to={url}>Read more...</Link>
-				</ExcerptWrapper>
-			</PostWrapper>
-		</Link>
-	)
-}
+		<PostWrapper>
+			<Link to={ url }>
+				<Image src={ post.feature_image } />
+			</Link>
+			<ExerptWrapper>
+				<Header>{ post.title }</Header>
+				<Paragraph>{ post.excerpt }</Paragraph>
+				<Link to={ url } css={ css`align-self: flex-end;` }>Read more...</Link>
+			</ExerptWrapper>
+		</PostWrapper>
+	);
+};
 
 PostCard.propTypes = {
 	post: PropTypes.shape({
@@ -72,6 +75,6 @@ PostCard.propTypes = {
 			profile_image: PropTypes.string,
 		}).isRequired,
 	}).isRequired,
-}
+};
 
-export default PostCard
+export default PostCard;

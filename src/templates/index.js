@@ -1,9 +1,10 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { graphql } from 'gatsby'
+import React from 'react';
+import PropTypes from 'prop-types';
+import { graphql } from 'gatsby';
+import styled from '@emotion/styled';
 
-import { Layout, PostCard } from '../components/common'
-import { MetaData } from '../components/common/meta'
+import { Layout, PostCard } from '../components/common';
+import { MetaData } from '../components/common/meta';
 
 /**
 * Main index page (home page)
@@ -13,14 +14,24 @@ import { MetaData } from '../components/common/meta'
 * in /utils/siteConfig.js under `postsPerPage`.
 *
 */
+
+const Container = styled.div`
+	margin: 0 auto;
+	width: 90%;
+	max-width: 1017px;
+	@media (min-width: 600px) {
+		width: 84%;
+	}
+`;
+
 const Index = ({ data, location }) => {
-	const posts = data.allGhostPost.edges
+	const posts = data.allGhostPost.edges;
 
 	return (
 		<>
 			<MetaData location={location} />
 			<Layout isHome={true}>
-				<div className="container">
+				<Container>
 					<h2>Recent Posts</h2>
 
 					<section>
@@ -29,11 +40,11 @@ const Index = ({ data, location }) => {
 							<PostCard key={node.id} post={node} />
 						))}
 					</section>
-				</div>
+				</Container>
 			</Layout>
 		</>
-	)
-}
+	);
+};
 
 Index.propTypes = {
 	data: PropTypes.shape({
@@ -43,9 +54,9 @@ Index.propTypes = {
 		pathname: PropTypes.string.isRequired,
 	}).isRequired,
 	pageContext: PropTypes.object,
-}
+};
 
-export default Index
+export default Index;
 
 // This page query loads all posts sorted descending by published date
 // The `limit` and `skip` values are used for pagination
@@ -63,4 +74,4 @@ export const pageQuery = graphql`
 			}
 		}
 	}
-`
+`;

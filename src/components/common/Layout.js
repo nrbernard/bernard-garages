@@ -1,24 +1,15 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import Helmet from 'react-helmet'
-import { Link, StaticQuery, graphql } from 'gatsby'
-import styled from '@emotion/styled'
-import { css } from '@emotion/core'
+import React from 'react';
+import PropTypes from 'prop-types';
+import Helmet from 'react-helmet';
+import { Link, StaticQuery, graphql } from 'gatsby';
+import styled from '@emotion/styled';
+import { Global, css } from '@emotion/core';
 
-import { Navigation } from '.'
+import { Navigation } from '.';
 
-// Styles
-import '../../styles/app.css'
-import { gray } from './PostCard'
-
-/**
-* Main layout component
-*
-* The Layout component wraps around each page and template.
-* It also provides the header, footer as well as the main
-* styles, and meta data for each page.
-*
-*/
+import 'normalize.css';
+import '../../styles/app.css';
+import { gray } from './PostCard';
 
 const Header = styled.header`
 	height: 8rem;
@@ -26,7 +17,7 @@ const Header = styled.header`
 	align-items: center;
 	justify-content: space-between;
 	padding-left: 1rem;
-`
+`;
 
 const Logo = styled.div`
 	background-color: white;
@@ -40,35 +31,52 @@ const Logo = styled.div`
 	&:hover > span {
 		color: #ee4938;
 	}
-`
+`;
 
 const Lettering = styled.span`
 	color: ${gray};
 	font-weight: 600;
 	font-size: 2.2rem;
 	transition: color 0.2s ease-out;
-`
+`;
 
 const Nav = styled.nav`
 	display: flex;
 	align-items: center;
-`
+`;
 
 const navItemClass = css`
 	padding-right: 2rem;
 	text-transform: uppercase;
-`
+`;
 
-const DefaultLayout = ({ data, children, bodyClass, isHome }) => {
-	const site = data.allGhostSettings.edges[0].node
-	const navItems = site.navigation
+const globalClass = css`
+	body {
+		color: #3a3a3a;
+		background: #fff;
+		margin: 0;
+		font-family: 'Rubik', sans-serif;
+		font-weight: 400;
+		line-height: 1.65;
+		font-size: 106.3%
+	}
+`;
+
+const DefaultLayout = ({
+	bodyClass,
+	data,
+	children,
+	isHome,
+}) => {
+	const site = data.allGhostSettings.edges[0].node;
+	const navItems = site.navigation;
 
 	return (
 		<>
 			<Helmet>
-				<html lang={site.lang} />
+				<html lang={ site.lang } />
 				<style type="text/css">{`${site.codeinjection_styles}`}</style>
-				<body className={bodyClass} />
+				<body className={ bodyClass } />
 			</Helmet>
 
 			<div className="viewport">
@@ -77,16 +85,22 @@ const DefaultLayout = ({ data, children, bodyClass, isHome }) => {
 						<Logo><Lettering>BG</Lettering></Logo>
 					</Link>
 					<Nav>
-						{
-							navItems.map((navItem, i) => (
-								<Link css={ navItemClass } to={navItem.url} key={i}>{navItem.label}</Link>
-							))
-						}
+						{ navItems.map(navItem => (
+							<Link
+								css={ navItemClass }
+								to={ navItem.url }
+								key={ navItem.label }
+							>
+								{navItem.label}
+							</Link>
+						)) }
 					</Nav>
 				</Header>
+
 				<div className="viewport-top">
+					<Global styles={ globalClass } />
 					{/* The main header section on top of the screen */}
-					<header className="site-head" style={{ ...site.cover_image && { backgroundImage: `url(${site.cover_image})` } }}>
+					<header className="site-head" style={ { ...site.cover_image && { backgroundImage: `url(${site.cover_image})` } } }>
 						<div className="container">
 							<div className="site-mast">
 								{ !isHome &&
@@ -115,20 +129,19 @@ const DefaultLayout = ({ data, children, bodyClass, isHome }) => {
 					<footer className="site-foot">
 						<div className="site-foot-nav container">
 							<div className="site-foot-nav-left">
-								<Link to="/">{site.title}</Link> © 2019 &mdash; Published with <a className="site-foot-nav-item" href="https://ghost.org" target="_blank" rel="noopener noreferrer">Ghost</a>
+								<Link to="/">{site.title}</Link>
 							</div>
 							<div className="site-foot-nav-right">
-								<Navigation data={site.navigation} navClass="site-foot-nav-item" />
+								<Navigation data={ site.navigation } navClass="site-foot-nav-item" />
 							</div>
 						</div>
 					</footer>
 
 				</div>
 			</div>
-
 		</>
-	)
-}
+	);
+};
 
 DefaultLayout.propTypes = {
 	children: PropTypes.node.isRequired,
@@ -138,11 +151,11 @@ DefaultLayout.propTypes = {
 		file: PropTypes.object,
 		allGhostSettings: PropTypes.object.isRequired,
 	}).isRequired,
-}
+};
 
 const DefaultLayoutSettingsQuery = props => (
 	<StaticQuery
-		query={graphql`
+		query={ graphql`
             query GhostSettings {
                 allGhostSettings {
                     edges {
@@ -159,9 +172,10 @@ const DefaultLayoutSettingsQuery = props => (
                     }
                 }
             }
-        `}
-		render={data => <DefaultLayout data={data} {...props} />}
+        ` }
+		// eslint-disable-next-line react/jsx-props-no-spreading
+		render={ data => <DefaultLayout data={ data } { ...props } /> }
 	/>
-)
+);
 
-export default DefaultLayoutSettingsQuery
+export default DefaultLayoutSettingsQuery;
