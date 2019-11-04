@@ -29,15 +29,15 @@ const Index = ({ data, location }) => {
 
 	return (
 		<>
-			<MetaData location={location} />
-			<Layout isHome={true}>
+			<MetaData location={ location } />
+			<Layout isHome>
 				<Container>
 					<h2>Recent Posts</h2>
 
 					<section>
 						{posts.map(({ node }) => (
 							// The tag below includes the markup for each post - components/common/PostCard.js
-							<PostCard key={node.id} post={node} />
+							<PostCard key={ node.id } post={ node } />
 						))}
 					</section>
 				</Container>
@@ -53,7 +53,16 @@ Index.propTypes = {
 	location: PropTypes.shape({
 		pathname: PropTypes.string.isRequired,
 	}).isRequired,
-	pageContext: PropTypes.object,
+	pageContext: PropTypes.shape({
+		isCreatedByStatefulCreatePages: PropTypes.bool,
+		pageNumber: PropTypes.number,
+		humanPageNumber: PropTypes.number,
+		skip: PropTypes.number,
+		limit: PropTypes.number,
+		numberOfPages: PropTypes.number,
+		previousPagePath: PropTypes.string,
+		nextPagePath: PropTypes.string,
+	}),
 };
 
 export default Index;

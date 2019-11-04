@@ -9,21 +9,25 @@ import { Navigation } from '.';
 
 import 'normalize.css';
 import '../../styles/app.css';
-import { gray } from './PostCard';
+import '../../styles/custom.css';
+import globalClass from '../../styles/global';
+import { gray } from '../../styles/colors';
 
 const Header = styled.header`
-	height: 8rem;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	padding-left: 1rem;
+	padding: 1.5em;
+	> a {
+		color: ${gray};
+	}
 `;
 
 const Logo = styled.div`
 	background-color: white;
 	border: 0.2rem solid ${gray};
-	height: 6rem;
-	width: 6rem;
+	height: 4em;
+	width: 4em;
 	border-radius: 50%;
 	display: flex;
 	justify-content: center;
@@ -36,7 +40,7 @@ const Logo = styled.div`
 const Lettering = styled.span`
 	color: ${gray};
 	font-weight: 600;
-	font-size: 2.2rem;
+	font-size: 1.5em;
 	transition: color 0.2s ease-out;
 `;
 
@@ -50,18 +54,6 @@ const navItemClass = css`
 	text-transform: uppercase;
 `;
 
-const globalClass = css`
-	body {
-		color: #3a3a3a;
-		background: #fff;
-		margin: 0;
-		font-family: 'Rubik', sans-serif;
-		font-weight: 400;
-		line-height: 1.65;
-		font-size: 106.3%
-	}
-`;
-
 const DefaultLayout = ({
 	bodyClass,
 	data,
@@ -73,6 +65,7 @@ const DefaultLayout = ({
 
 	return (
 		<>
+			<Global styles={ globalClass } />
 			<Helmet>
 				<html lang={ site.lang } />
 				<style type="text/css">{`${site.codeinjection_styles}`}</style>
@@ -84,39 +77,30 @@ const DefaultLayout = ({
 					<Link to="/">
 						<Logo><Lettering>BG</Lettering></Logo>
 					</Link>
-					<Nav>
+					{/* <Nav>
 						{ navItems.map(navItem => (
 							<Link
 								css={ navItemClass }
 								to={ navItem.url }
 								key={ navItem.label }
 							>
-								{navItem.label}
+								{ navItem.label }
 							</Link>
 						)) }
-					</Nav>
+					</Nav> */}
 				</Header>
 
 				<div className="viewport-top">
-					<Global styles={ globalClass } />
-					{/* The main header section on top of the screen */}
-					<header className="site-head" style={ { ...site.cover_image && { backgroundImage: `url(${site.cover_image})` } } }>
-						<div className="container">
-							<div className="site-mast">
-								{ !isHome &&
-									<div className="site-mast-left">
-										<Link to="/">{ site.title }</Link>
-									</div>
-								}
-							</div>
-							{ isHome &&
+					{ isHome &&
+						<header className="site-head" style={ { ...site.cover_image && { backgroundImage: `url(${site.cover_image})` } } }>
+							<div className="container">
 								<div className="site-banner">
 									<h1 className="site-banner-title">{site.title}</h1>
 									<p className="site-banner-desc">{site.description}</p>
 								</div>
-							}
-						</div>
-					</header>
+							</div>
+						</header>
+					}
 
 					<main className="site-main">
 						{/* All the main content gets inserted here, index.js, post.js */}
@@ -131,9 +115,9 @@ const DefaultLayout = ({
 							<div className="site-foot-nav-left">
 								<Link to="/">{site.title}</Link>
 							</div>
-							<div className="site-foot-nav-right">
+							{/* <div className="site-foot-nav-right">
 								<Navigation data={ site.navigation } navClass="site-foot-nav-item" />
-							</div>
+							</div> */}
 						</div>
 					</footer>
 

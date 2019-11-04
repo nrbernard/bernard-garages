@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
 import { Link } from 'gatsby';
-
-export const gray = '#3a3a3a';
+import { gray } from '../../styles/colors';
 
 const PostWrapper = styled.li`
 	display: grid;
