@@ -92,7 +92,7 @@ MetaData.propTypes = {
 		ghostTag: PropTypes.object,
 		ghostAuthor: PropTypes.object,
 		ghostPage: PropTypes.object,
-	}).isRequired,
+	}),
 	settings: PropTypes.shape({
 		allGhostSettings: PropTypes.object.isRequired,
 	}).isRequired,
