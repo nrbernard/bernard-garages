@@ -3,9 +3,7 @@ import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import { Link, StaticQuery, graphql } from 'gatsby';
 import styled from '@emotion/styled';
-import { Global, css } from '@emotion/core';
-
-import { Navigation } from '.';
+import { Global } from '@emotion/core';
 
 import 'normalize.css';
 import '../../styles/app.css';
@@ -44,16 +42,6 @@ const Lettering = styled.span`
 	transition: color 0.2s ease-out;
 `;
 
-const Nav = styled.nav`
-	display: flex;
-	align-items: center;
-`;
-
-const navItemClass = css`
-	padding-right: 2rem;
-	text-transform: uppercase;
-`;
-
 const DefaultLayout = ({
 	bodyClass,
 	data,
@@ -61,7 +49,6 @@ const DefaultLayout = ({
 	isHome,
 }) => {
 	const site = data.allGhostSettings.edges[0].node;
-	const navItems = site.navigation;
 
 	return (
 		<>
@@ -77,17 +64,6 @@ const DefaultLayout = ({
 					<Link to="/">
 						<Logo><Lettering>BG</Lettering></Logo>
 					</Link>
-					{/* <Nav>
-						{ navItems.map(navItem => (
-							<Link
-								css={ navItemClass }
-								to={ navItem.url }
-								key={ navItem.label }
-							>
-								{ navItem.label }
-							</Link>
-						)) }
-					</Nav> */}
 				</Header>
 
 				<div className="viewport-top">
@@ -109,18 +85,13 @@ const DefaultLayout = ({
 				</div>
 
 				<div className="viewport-bottom">
-					{/* The footer at the very bottom of the screen */}
 					<footer className="site-foot">
 						<div className="site-foot-nav container">
 							<div className="site-foot-nav-left">
 								<Link to="/">{site.title}</Link>
 							</div>
-							{/* <div className="site-foot-nav-right">
-								<Navigation data={ site.navigation } navClass="site-foot-nav-item" />
-							</div> */}
 						</div>
 					</footer>
-
 				</div>
 			</div>
 		</>
